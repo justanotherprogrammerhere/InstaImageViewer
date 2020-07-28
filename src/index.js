@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 ReactDOM.render(
-    <span>
-        Image Viewer
-    </span>, 
-    document.getElementById('root')
+  <Router>
+    <Route exact path="/" component={Login} />
+  </Router>,
+  document.getElementById("root")
 );
