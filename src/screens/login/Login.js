@@ -52,7 +52,7 @@ export default class Login extends React.Component {
       this.setState({ validateCredentials: true });
       sessionStorage.setItem(
         "accessToken",
-        "8661035776.d0fcd39.39f63ab2f88d4f9c92b0862729ee2784"
+        "IGQVJVcWs5OTZARV0lqZAnB6VzczaW9QbXB1NTJoM2hyWFdiLVlMcVJwQUVrSHBpVVppdlVNU0U3VHVfZAnJTQ2V0RnkzOVdvR1JCV0xCdC1YTFZAvZAHVKVDdCYkJybFRsSGs0ZA3NrQ01jSDBGQXNYc0cyNWUzYUNtS1BuSFRn"
       );
       window.location = "/home";
     } else {
