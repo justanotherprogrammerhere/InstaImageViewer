@@ -10,6 +10,7 @@ ReactDOM.render(
   <Router>
     <Route exact path="/" component={Login} />
         <Route exact path="/home" component={Home}/>
+
   </Router>,
   document.getElementById("root")
 );
