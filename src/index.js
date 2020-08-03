@@ -8,7 +8,7 @@ import Home from "./screens/home/Home";
 
 ReactDOM.render(
   <Router>
-    <Route exact path="/home" component={Home} />
+    <Route exact path="/" component={Login} />
   </Router>,
   document.getElementById("root")
 );
