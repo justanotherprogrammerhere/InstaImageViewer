@@ -224,7 +224,6 @@ export default class Home extends React.Component {
                                                 }
                                             </div>
                                             <span className={"small-padding"}></span>
-
                                             <div className="comment-container medium-padding">
                                                 {this.state.comments[index] !== undefined && this.state.comments[index] !== null ?
                                                     this.state.comments[index].split(':').map(
