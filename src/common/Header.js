@@ -1,7 +1,7 @@
 import * as React from "react";
 import "./Header.css";
 import SearchIcon from "@material-ui/icons/Search";
-import { Input, InputAdornment, IconButton } from "@material-ui/core";
+import {Input, InputAdornment, IconButton} from "@material-ui/core";
 import profileImage from '../assets/images/image.jpg'
 
 export default class Header extends React.Component {
@@ -11,14 +11,16 @@ export default class Header extends React.Component {
             showDropdown: false
         };
     }
+
     handleChange(e) {
         this.props.onFilter(e.target.value);
     }
+
     toggleDropdown = () => {
         if (this.state.showDropdown) {
-            this.setState({ showDropdown: false });
+            this.setState({showDropdown: false});
         } else {
-            this.setState({ showDropdown: true });
+            this.setState({showDropdown: true});
         }
     };
 
@@ -26,9 +28,10 @@ export default class Header extends React.Component {
         sessionStorage.removeItem("accessToken");
         window.location = "/";
     };
+
     render() {
-        const { homepageHeader, url, goToHome } = this.props;
-        const { showDropdown } = this.state;
+        const {homepageHeader, url, goToHome} = this.props;
+        const {showDropdown} = this.state;
         return (
             <React.Fragment>
                 {homepageHeader ? (
@@ -47,7 +50,7 @@ export default class Header extends React.Component {
                                 className="search"
                                 startAdornment={
                                     <InputAdornment position="start">
-                                        <SearchIcon />
+                                        <SearchIcon/>
                                     </InputAdornment>
                                 }
                                 placeholder="Search..."
@@ -58,11 +61,11 @@ export default class Header extends React.Component {
                                 onClick={this.toggleDropdown}
                                 className="pic-wrapper"
                             >
-                                <img src={profileImage} className="profile-pic" alt="pic" />
+                                <img src={profileImage} className="profile-pic" alt="pic"/>
                             </IconButton>
                             {showDropdown ? (
                                 <div className="dropdown">
-                                    <p className="option account" >
+                                    <p className="option account">
                                         My Account
                                     </p>
                                     <hr></hr>
