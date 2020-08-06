@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import Header from "../../common/Header";
 import "./Login.css";
+import properties from "../../common/Properties";
 
 export default class Login extends React.Component {
   constructor() {
@@ -20,15 +21,15 @@ export default class Login extends React.Component {
       emptyPassword: false
     };
   }
-  handleChange(e, type) {
+  handleEvent(e, type) {
     const value = e.target.value;
     const nextState = {};
     nextState[type] = value;
     this.setState(nextState);
   }
   handleClick = () => {
-    const user = "user";
-    const pwd = "user";
+    const user = properties.username;
+    const pwd = properties.password;
     const { username, password } = this.state;
     if (username !== "" || password !== "") {
       this.setState({
@@ -52,7 +53,7 @@ export default class Login extends React.Component {
       this.setState({ validateCredentials: true });
       sessionStorage.setItem(
         "accessToken",
-        "IGQVJVcWs5OTZARV0lqZAnB6VzczaW9QbXB1NTJoM2hyWFdiLVlMcVJwQUVrSHBpVVppdlVNU0U3VHVfZAnJTQ2V0RnkzOVdvR1JCV0xCdC1YTFZAvZAHVKVDdCYkJybFRsSGs0ZA3NrQ01jSDBGQXNYc0cyNWUzYUNtS1BuSFRn"
+          properties.accessToken
       );
       window.location = "/home";
     } else {
@@ -63,13 +64,13 @@ export default class Login extends React.Component {
     const { validateCredentials, emptyUsername, emptyPassword } = this.state;
     return (
       <div className="login-wrapper">
-        <Card className="login-card">
+        <Card className="login-hoarding">
           <h3 className="login-heading">LOGIN</h3>
           <FormControl fullWidth={true} margin="normal">
             <InputLabel htmlFor="username">Username *</InputLabel>
             <Input
               id="username"
-              onChange={e => this.handleChange(e, "username")}
+              onChange={e => this.handleEvent(e, "username")}
             />
             {emptyUsername ? <span className="error">required</span> : null}
           </FormControl>
@@ -78,7 +79,7 @@ export default class Login extends React.Component {
             <Input
               id="password"
               type="password"
-              onChange={e => this.handleChange(e, "password")}
+              onChange={e => this.handleEvent(e, "password")}
             />
             {emptyPassword ? <span className="error">required</span> : null}
             {!validateCredentials ? (
@@ -88,7 +89,7 @@ export default class Login extends React.Component {
           <Button
             variant="contained"
             color="primary"
-            className="login-btn m1"
+            className="login-button in1"
             onClick={this.handleClick}
           >
             LOGIN
