@@ -1,9 +1,9 @@
-.card-wrapper {
-    width: 90%;
+.photo-wrapper {
+    width: 75%;
     margin: 0 auto;
 }
 
-.card-wrapper .card {
+.photo-wrapper .photo {
     display: inline-block;
     width: 45%;
     margin: 1rem;

@@ -16,13 +16,16 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import properties from "../../common/Properties";
 
+/*
 const API2 = 'https://graph.instagram.com/me/media?fields=id,caption&access_token=' + properties.accessToken;
+
 const API5 = 'https://graph.instagram.com/';
 const API6 = '?fields=media_type,media_url,username,timestamp&access_token=' + properties.accessToken;
 
 const MANUAL_API1 = 'https://raw.githubusercontent.com/justanotherprogrammerhere/InstaImageViewer/master/Test/Data/all_posts.json';
 const MANUAL_API2 = 'https://raw.githubusercontent.com/justanotherprogrammerhere/InstaImageViewer/master/Test/Data/';
 const MANUAL_API3 = '/photo_details.json';
+*/
 
 export default class Home extends React.Component {
     constructor() {
@@ -48,8 +51,8 @@ export default class Home extends React.Component {
             return;
         }
 
-        //await fetch(API2)
-        await fetch(MANUAL_API1)
+        //await fetch(properties.photoDetailsApi1 + properties.accessToken)
+        await fetch(properties.photosListApi)
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -61,9 +64,10 @@ export default class Home extends React.Component {
             //.then(json => console.log(json))
             .catch(error => this.setState({error, photosIsLoading: false}));
 
+
         await this.state.photos.map(photo =>
-            //fetch(API5 + photo.id + API6)
-            fetch(MANUAL_API2 + photo.id + MANUAL_API3)
+            //fetch(properties.photoDetailsApi1 + photo.id + properties.photoDetailsApi2 + properties.accessToken)
+            fetch(properties.photoDetailsApi1 + photo.id + properties.photoDetailsApi2)
                 .then(response => {
                     if (response.ok) {
                         return response.json();
@@ -93,7 +97,7 @@ export default class Home extends React.Component {
         var resTs = timeStamp.replace('/-', '//');
         resTs = resTs.replace('T', ' ');
         resTs = resTs.replace('+', ' ');
-        resTs = resTs.slice(0,resTs.length-4);
+        resTs = resTs.slice(0, resTs.length - 4);
         return resTs;
 
     };
@@ -127,7 +131,7 @@ export default class Home extends React.Component {
     };
 
     likeBtnHandler = (imageId) => {
-        var i = 0
+        var i = 0;
         var imageArray = this.state.photoDetails;
         for (i; i < imageArray.length; i++) {
             if (imageArray[i].id === imageId) {
@@ -178,13 +182,14 @@ export default class Home extends React.Component {
         return (
             <React.Fragment>
                 <div>
+
                     <Header
                         homepageHeader={true}
                         onFilter={this.filterPhotos}
                     />
-                    <div className="card-wrapper">
+                    <div className="photo-wrapper">
                         {photoDetails && photoDetails.length > 0 ? photoDetails.map((imgDetail, index) => (
-                                <Card className="card" key={imgDetail.id}>
+                                <Card className="photo" key={imgDetail.id}>
 
                                     <CardHeader
                                         avatar={
@@ -215,7 +220,8 @@ export default class Home extends React.Component {
                                                 <IconButton className="like-button" aria-label="like-button"
                                                             onClick={() =>
                                                                 this.likeBtnHandler(imgDetail.id)}> {imgDetail.userLiked ?
-                                                    <FavoriteIcon className="image-liked-icon" fontSize="large" color="secondary"/> :
+                                                    <FavoriteIcon className="image-liked-icon" fontSize="large"
+                                                                  color="secondary"/> :
                                                     <FavoriteBorderIcon className="image-like-icon" fontSize="large"/>}
                                                 </IconButton>
                                                 {imgDetail.likes === 1 ?

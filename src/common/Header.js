@@ -30,7 +30,7 @@ export default class Header extends React.Component {
     };
 
     render() {
-        const {homepageHeader, url, goToHome} = this.props;
+        const {homepageHeader, goToHome} = this.props;
         const {showDropdown} = this.state;
         return (
             <React.Fragment>
