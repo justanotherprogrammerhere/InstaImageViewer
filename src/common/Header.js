@@ -23,7 +23,9 @@ export default class Header extends React.Component {
             this.setState({showDropdown: true});
         }
     };
-
+    goToProfile = () => {
+        window.location = "/profile";
+    };
     logout = () => {
         sessionStorage.removeItem("accessToken");
         window.location = "/";
@@ -65,7 +67,7 @@ export default class Header extends React.Component {
                             </IconButton>
                             {showDropdown ? (
                                 <div className="dropdown">
-                                    <p className="option account">
+                                    <p className="option account" onClick={this.goToProfile}>
                                         My Account
                                     </p>
                                     <hr></hr>
