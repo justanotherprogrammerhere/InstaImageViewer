@@ -27,7 +27,7 @@ export default class Home extends React.Component {
             fullName: properties.fullName,
             updatedFullname: "",
             emptyFullname: false,
-            openModal: false,
+            openEditNameModal: false,
             numUsersFollowed: 20,
             numUsersFollowedBy: 50
         };
@@ -82,12 +82,12 @@ export default class Home extends React.Component {
         )
     }
 
-    openModal = () => {
-        this.setState({openModal: true});
+    openEditNameModal = () => {
+        this.setState({openEditNameModal: true});
     };
 
-    closeModal = () => {
-        this.setState({openModal: false});
+    closeNameModal = () => {
+        this.setState({openEditNameModal: false});
     };
 
     handleChange = (e, type) => {
@@ -102,7 +102,7 @@ export default class Home extends React.Component {
         if (updatedFullname.trim() !== "") {
             this.setState({
                 fullName: updatedFullname,
-                openModal: false,
+                openEditNameModal: false,
                 emptyFullname: false,
                 updatedFullname: ""
             });
@@ -112,7 +112,7 @@ export default class Home extends React.Component {
     };
 
     render() {
-        const {photos, photoDetails, profilePhoto, counts, openModal, emptyFullname, numUsersFollowedBy, numUsersFollowed} = this.state;
+        const {photos, photoDetails, profilePhoto, counts, openEditNameModal, emptyFullname, numUsersFollowedBy, numUsersFollowed} = this.state;
         return (
             <React.Fragment>
 
@@ -138,13 +138,13 @@ export default class Home extends React.Component {
                                         color="secondary"
                                         aria-label="edit"
                                         className="edit-btn"
-                                        onClick={this.openModal}>
+                                        onClick={this.openEditNameModal}>
                                         <EditIcon/>
                                     </Fab>
                                     <div>
                                         <Dialog
-                                            open={openModal}
-                                            onClose={this.closeModal}
+                                            open={openEditNameModal}
+                                            onClose={this.closeNameModal}
                                             aria-labelledby="form-dialog-title"
                                             className="update-modal">
                                             <DialogTitle id="form-dialog-title">Edit</DialogTitle>

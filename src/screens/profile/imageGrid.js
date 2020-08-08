@@ -1,5 +1,14 @@
 import React from "react";
-import { GridList, GridListTile } from "@material-ui/core";
+import {
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    GridList,
+    GridListTile,
+    TextField
+} from "@material-ui/core";
 export default class photoGrid extends React.Component {
   render() {
     const { photos } = this.props;
@@ -11,6 +20,8 @@ export default class photoGrid extends React.Component {
               <img src={photo.media_url} alt="img" />
             </GridListTile>
           ))}
+
+
         </GridList>
       </React.Fragment>
     );
