@@ -16,17 +16,6 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import properties from "../../common/Properties";
 
-/*
-const API2 = 'https://graph.instagram.com/me/media?fields=id,caption&access_token=' + properties.accessToken;
-
-const API5 = 'https://graph.instagram.com/';
-const API6 = '?fields=media_type,media_url,username,timestamp&access_token=' + properties.accessToken;
-
-const MANUAL_API1 = 'https://raw.githubusercontent.com/justanotherprogrammerhere/InstaImageViewer/master/Test/Data/all_posts.json';
-const MANUAL_API2 = 'https://raw.githubusercontent.com/justanotherprogrammerhere/InstaImageViewer/master/Test/Data/';
-const MANUAL_API3 = '/photo_details.json';
-*/
-
 export default class Home extends React.Component {
     constructor() {
         super();
@@ -51,7 +40,7 @@ export default class Home extends React.Component {
             return;
         }
 
-        //await fetch(properties.photoDetailsApi1 + properties.accessToken)
+        //await fetch(properties.photosListApi + accessToken)
         await fetch(properties.photosListApi)
             .then(response => {
                 if (response.ok) {
@@ -61,12 +50,11 @@ export default class Home extends React.Component {
                 }
             })
             .then(data1 => this.setState({photos: data1.data, photosIsLoading: false}))
-            //.then(json => console.log(json))
             .catch(error => this.setState({error, photosIsLoading: false}));
 
 
         await this.state.photos.map(photo =>
-            //fetch(properties.photoDetailsApi1 + photo.id + properties.photoDetailsApi2 + properties.accessToken)
+            //fetch(properties.photoDetailsApi1 + photo.id + properties.photoDetailsApi2 + accessToken)
             fetch(properties.photoDetailsApi1 + photo.id + properties.photoDetailsApi2)
                 .then(response => {
                     if (response.ok) {
@@ -77,7 +65,11 @@ export default class Home extends React.Component {
                 })
                 .then(data => {
                     if (data.media_url) {
-                        data.caption = photo.caption;
+                        if(photo.caption !== "" || photo.caption !== null || photo.caption !== "undefined")
+                            data.caption = photo.caption;
+                        else if( photo.caption === "undefined")
+                            data.caption = "";
+
                         //Manually creating likes
                         data.likes = Math.floor(Math.random() * 100);
                         data.tags = '#testtag1 #testag2';
@@ -124,7 +116,8 @@ export default class Home extends React.Component {
 
         if (photoDetails) {
             const result = photoDetails
-                .filter(imageData => imageData.caption.includes(str))
+                .filter(imageData =>
+                    imageData.caption.includes(str))
                 .map(imageData => imageData);
             this.setState({photoDetails: result});
         }
@@ -155,7 +148,6 @@ export default class Home extends React.Component {
     };
 
     commentHandler = (event, index) => {
-        //console.log(this.state.commentForImage[index])
         this.setState({comment: event.target.value});
         this.state.commentForImage[index] = event.target.value;
         this.forceUpdate();
@@ -167,7 +159,6 @@ export default class Home extends React.Component {
                 this.state.comments[index] = this.state.comment;
             else
                 this.state.comments[index] = this.state.comments[index] + ":" + this.state.comment;
-            console.log(this.state.comments);
             this.forceUpdate();
 
             this.setState({comment: ''});
